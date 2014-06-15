@@ -1,34 +1,28 @@
 package br.org.frameworkdemoiselle.cursoJPA;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 import br.org.frameworkdemoiselle.cursoJPA.entity.Aluno;
+import br.org.frameworkdemoiselle.cursoJPA.persistence.AlunoDAO;
+import br.org.frameworkdemoiselle.cursoJPA.persistence.JPAUtil;
 
 public class AlunoTest {
 	@Test
 	public void testInserirAluno(){
-		long novoId = 1;
+		long novoId2 = 2;
         
         Aluno aluno = new Aluno();
-        aluno.setId(novoId);
-        aluno.setNome("João");
+        aluno.setId(novoId2);
+        aluno.setNome("José");
             aluno.setIdade(30);
         aluno.setMatricula("12345");
-        EntityManagerFactory factory =
-                         Persistence.createEntityManagerFactory("cursoJPA-ds");
-        EntityManager em = factory.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(aluno);
-        em.getTransaction().commit();
+        AlunoDAO alunoDAO = new AlunoDAO(JPAUtil.getEntityManager());
+        alunoDAO.salvar(aluno);
         
         Aluno aluno2;
-        aluno2 = em.find(Aluno.class, novoId);
-          Assert.assertEquals("João", aluno2.getNome());
-            em.close();
+        aluno2 = alunoDAO.buscar(novoId2);
+        Assert.assertEquals("José", aluno2.getNome());
+        Assert.assertFalse(alunoDAO.listar().isEmpty());
 	}
 }

@@ -4,21 +4,10 @@ import javax.persistence.EntityManager;
 
 import br.org.frameworkdemoiselle.cursoJPA.entity.Aluno;
 
-public class AlunoDAO {
-	private final EntityManager em;
+public class AlunoDAO extends GenericDAO<Aluno>{
+
 	public AlunoDAO (EntityManager em){
-		this.em = em;
+		super(em, Aluno.class);
 	}
 	
-	public void adicionar(Aluno aluno){
-        this.em.persist(aluno);
-    }
- 
-    public void remover(Aluno aluno){
-        this.em.remove(aluno);
-    }
- 
-    public Aluno buscar(Long id){
-         return this.em.getReference(Aluno.class,id);
-    }
 }
