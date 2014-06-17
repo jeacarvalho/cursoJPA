@@ -1,7 +1,14 @@
 package br.org.frameworkdemoiselle.cursoJPA.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Table(name="TB_ALUNO")
@@ -13,7 +20,35 @@ public class Aluno {
 	private String nome;
 	private int idade;
 	
+	@OneToOne
+	@PrimaryKeyJoinColumn(name="endereco_id", referencedColumnName="id")
+	private Endereco endereco;
+
+	@OneToOne
+	@PrimaryKeyJoinColumn(name="curso_id", referencedColumnName="id")
+	private Curso curso;
+
 	
+	@OneToMany
+	private List<Telefone> telefones;
+	
+	
+	@ManyToMany(mappedBy="alunos")
+	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+	
+	
+	public Curso getCurso() {
+		return curso;
+	}
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 	public int getIdade() {
 		return idade;
 	}
@@ -37,6 +72,18 @@ public class Aluno {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 	
 
