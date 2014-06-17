@@ -3,6 +3,7 @@ package br.org.frameworkdemoiselle.cursoJPA.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -20,20 +21,20 @@ public class Aluno {
 	private String nome;
 	private int idade;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.PERSIST})
 	@PrimaryKeyJoinColumn(name="endereco_id", referencedColumnName="id")
 	private Endereco endereco;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.PERSIST})
 	@PrimaryKeyJoinColumn(name="curso_id", referencedColumnName="id")
 	private Curso curso;
 
 	
-	@OneToMany
-	private List<Telefone> telefones;
+	@OneToMany(cascade = {CascadeType.PERSIST})
+	private List<Telefone> telefones = new ArrayList<Telefone>();
 	
 	
-	@ManyToMany(mappedBy="alunos")
+	@ManyToMany(mappedBy="alunos", cascade = {CascadeType.PERSIST})
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
 	

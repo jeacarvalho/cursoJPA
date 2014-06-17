@@ -15,6 +15,10 @@
  
  
     <class>br.org.frameworkdemoiselle.cursoJPA.entity.Aluno</class>
+    <class>br.org.frameworkdemoiselle.cursoJPA.entity.Telefone</class>
+    <class>br.org.frameworkdemoiselle.cursoJPA.entity.Disciplina</class>
+    <class>br.org.frameworkdemoiselle.cursoJPA.entity.Curso</class>
+    <class>br.org.frameworkdemoiselle.cursoJPA.entity.Endereco</class>
  
  
     <properties>

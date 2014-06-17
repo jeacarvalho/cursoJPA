@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Disciplina {
@@ -14,9 +15,10 @@ public class Disciplina {
 	private Long id;
 	private String nome;
 
+	@ManyToMany
 	@JoinTable(name="aluno_disciplina", 
 		      joinColumns={@JoinColumn(name="disciplina_id")},
-		      inverseJoinColumns={@JoinColumn(name="aluno_id")})
+		      inverseJoinColumns={@JoinColumn(name="aluno_id")})	
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 
 	public Long getId() {
